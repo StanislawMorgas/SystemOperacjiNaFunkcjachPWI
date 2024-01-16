@@ -20,5 +20,7 @@ def wczytaj():
     with open('funkcje.json', 'r') as file:
         data = json.load(file)
     funkcje_lista = data['funkcje']
+    print("Funkcje zostały wczytane.")
+    print("Miłego dnia :)")
     return funkcje_lista
 
