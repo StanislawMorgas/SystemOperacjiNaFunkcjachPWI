@@ -8,9 +8,17 @@ def zapisz(L):
     print("Funkcje zostały zapisane do pliku 'funkcje.json'.")
     print("Miłego dnia :)")
 
+"""
+      |\      _,,,---,,_
+ZZZzz /,`.-'`'    -.  ;-;;,_
+     |,4-  ) )-,_. ,\ (  `'-'
+    '---''(_/--'  `-'\_) 
+"""
+
 def wczytaj():
     """Zwraca liste funkcji z pliku funkcje.JSON"""
     with open('funkcje.json', 'r') as file:
         data = json.load(file)
     funkcje_lista = data['funkcje']
     return funkcje_lista
+
