@@ -1,18 +1,23 @@
 from re import sub, findall
 
-# funkcja = "2*3*x + 7*1*(-x) + 9*1000*(-7)"
-# funkcja = funkcja.replace(" ", "")
-
 
 def simple_mult(fcja):
     def mult_el(match):
-        num = findall(r'-?\d+', match.group(0))
+        num = findall(r'-?\d+\.\d+|\d+', match.group(0))
+        print(num)
         res = 1
         for n in num:
-            res *= int(n)
-        return str(res)
-    fcja = sub(r'(\(?[+-]?\d+\)?)(?:\s*\*\s*(\(?[+-]?\d+\)?))+', mult_el, fcja)
+            print(n)
+            if "." in n:
+                res *= float(n)
+            else:
+                res *= int(n)
+        if res >= 0:
+            return "+" + str(res)
+        else:
+            return str(res)
+
+    fcja = sub(r'(\(?[+-]?(?:\d+\.\d+|\d+)\)?)(?:\s*\*\s*(\(?[+-]?(?:\d+\.\d+|\d+)\)?))+', mult_el, fcja)
+    if fcja[0] == "+":
+        fcja = fcja[1:]
     return fcja
-
-
-
