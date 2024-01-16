@@ -12,12 +12,14 @@ def simple_mult(fcja):
                 res *= float(n)
             else:
                 res *= int(n)
-        if res >= 0:
+        if res > 0:
             return "+" + str(res)
+        elif res == 0:
+            return ""
         else:
             return str(res)
 
     fcja = sub(r'(\(?[+-]?(?:\d+\.\d+|\d+)\)?)(?:\s*\*\s*(\(?[+-]?(?:\d+\.\d+|\d+)\)?))+', mult_el, fcja)
-    if fcja[0] == "+":
+    if fcja[0] == "+" or fcja[0] == "*":
         fcja = fcja[1:]
     return fcja
