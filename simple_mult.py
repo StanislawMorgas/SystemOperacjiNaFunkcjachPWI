@@ -4,18 +4,14 @@ from re import sub, findall
 def simple_mult(fcja):
     def mult_el(match):
         num = findall(r'-?\d+\.\d+|\d+', match.group(0))
-        print(num)
         res = 1
         for n in num:
-            print(n)
             if "." in n:
                 res *= float(n)
             else:
                 res *= int(n)
-        if res > 0:
+        if res >= 0:
             return "+" + str(res)
-        elif res == 0:
-            return ""
         else:
             return str(res)
 
