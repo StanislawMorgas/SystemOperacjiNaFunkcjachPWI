@@ -29,7 +29,7 @@ plt.plot(x, y, linestyle='-')
 plt.xlabel('x')
 plt.ylabel('f(x)')
 plt.grid(True)
-plt.show()
 plt.savefig("wykres.png")
+plt.show()
 
 
