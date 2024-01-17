@@ -23,6 +23,8 @@ def calka_monte_carlo(funkcja, a, b):
     maximum = minmax(funkcja,a,b)[1]
     if minimum > 0:
         minimum = 0
+    if maximum < 0:
+        maximum = 0
     x = symbols('x')
     cnt = 0
     wyrazenie = sympify(funkcja)
