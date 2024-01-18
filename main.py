@@ -1,15 +1,32 @@
-from input import *
 from time import sleep
+from input import *
 from calka_monte_carlo import *
+from calka_num import *
 
 def wybierzFunkcje(lista):
     while True:
         try:
-            a = int(input("Podaj indeks funkcji która chesz użyć (Zaczynając od 1)"))
+            a = int(input("Podaj indeks funkcji która chesz użyć (Zaczynając od 1): "))
             if a > 0 and a <= len(lista):
                 return a-1
             else:
                 print("Wpisano niepoprawny argument")
+        except ValueError:
+            print("Wpisano niepoprawny argument")
+
+def wybierzZakres():
+    while True:
+        try:
+            a = int(input("Podaj lewy zakres całki: "))
+            break
+        except ValueError:
+            print("Wpisano niepoprawny argument")
+    while True:
+        try:
+            b = int(input("Podaj prawy zakres całki: "))
+            if b < a:
+                print("Podano błędny zakres.")
+            else: return a,b
         except ValueError:
             print("Wpisano niepoprawny argument")
 
@@ -50,6 +67,7 @@ while True:
         a = int(input("Wpisz numer operacji: "))
     except ValueError:
         print("Wpisano niepoprawny argument")
+        print()
         print("-----------------------------------------------------------")
         continue
 
@@ -58,16 +76,16 @@ while True:
         funk = wczytaj()
     elif a == 2:
         if czy_wczytane:
-            #tu coś do liczenia calek monte carlo
-            #tu powinien być prompt o wpisanie indexu funkcji w liscie ktorej chcemy uzyc i ta funkcja powinna byc przekazana do odpowiedniej funkcji
-            #reszta opcji analogicznie
-            pass
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            a,b = wybierzZakres()
+            print(f"Wynik: {calka_monte_carlo(wybor,a,b)}")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 3:
         if czy_wczytane:
-            #tu cos do liczenia calek numerycznie
-            pass
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            a, b = wybierzZakres()
+            print(f"Wynik: {calka_num(wybor,a,b)}")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 4:
@@ -92,6 +110,7 @@ while True:
         exit()
     else:
         print("Wpisano niepoprawny argument")
+    print()
     print("-----------------------------------------------------------")
 
 r"""
