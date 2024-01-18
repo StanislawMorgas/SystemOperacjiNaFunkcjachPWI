@@ -1,5 +1,18 @@
 from input import *
 from time import sleep
+from calka_monte_carlo import *
+
+def wybierzFunkcje(lista):
+    while True:
+        try:
+            a = int(input("Podaj indeks funkcji która chesz użyć (Zaczynając od 1)"))
+            if a > 0 and a <= len(lista):
+                return a-1
+            else:
+                print("Wpisano niepoprawny argument")
+        except ValueError:
+            print("Wpisano niepoprawny argument")
+
 
 logo = r"""
  ________  ________  ________   ________ 
