@@ -5,8 +5,10 @@ def zapisz(L):
     funkcje_data = {"funkcje": L}
     with open('funkcje.json', 'w') as file:
         json.dump(funkcje_data, file, indent=4)
+    print()
     print("Funkcje zostały zapisane do pliku 'funkcje.json'.")
     print("Miłego dnia :)")
+    print()
 
 """
       |\      _,,,---,,_
@@ -20,7 +22,14 @@ def wczytaj():
     with open('funkcje.json', 'r') as file:
         data = json.load(file)
     funkcje_lista = data['funkcje']
+    print()
     print("Funkcje zostały wczytane.")
     print("Miłego dnia :)")
+    print()
     return funkcje_lista
+def parsujDoObliczen(f):
+    return f.split(" ")[2]
+
+def parsujDoZapisu(f):
+    return "y = " + f
 
