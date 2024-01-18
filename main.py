@@ -1,6 +1,7 @@
-from input import *
 from time import sleep
+from input import *
 from calka_monte_carlo import *
+from calka_num import *
 
 def wybierzFunkcje(lista):
     while True:
@@ -82,8 +83,9 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 3:
         if czy_wczytane:
-            #tu cos do liczenia calek numerycznie
-            pass
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            a, b = wybierzZakres()
+            print(f"Wynik: {calka_num(wybor,a,b)}")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 4:
