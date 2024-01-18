@@ -4,8 +4,10 @@ from numpy import cos, sin, log, exp, sqrt, pi, abs
 import matplotlib.pyplot as plt
 
 # %%
-def wykres(l,r, wzor_string):
+def wykres(l,r, wzor_string, karciona): # karciona oznacza że funkcja jest napisana z "daszkiem"
     x = np.arange(l, r, 0.01)
+    if karciona:
+        y = y.replace("^", "**")    
     y = eval(wzor_string)
     plt.title(f'Wykres {wzor_string}')
     plt.plot(x, y, linestyle='-')
@@ -16,8 +18,10 @@ def wykres(l,r, wzor_string):
     plt.show()
 
 # %%
-def calka(l,r,wzor_string,a,b):
+def calka(l,r,wzor_string,a,b, karciona):    # karciona oznacza że funkcja jest napisana z "daszkiem"
     x = np.arange(l, r, 0.01)
+    if karciona:
+        y = y.replace("^", "**")    
     y = eval(wzor_string)
     plt.fill_between(x, y, where=[(i >= a and i <= b) for i in x], alpha=0.6, color='red')
     plt.title(f'Wykres {wzor_string} od {a} do {b}')
@@ -41,9 +45,9 @@ if __name__ == '__main__':
         print("Prosze podac lewy i prawy koniec przedzialu całkowania")
         a = float(input())
         b = float(input())
-        calka(l,r,wzor_string,a,b)
+        calka(l,r,wzor_string,a,b, 0)
     else:
-        wykres(l,r,wzor_string)
+        wykres(l,r,wzor_string, 0)
 
 # %% [markdown]
 # jeśli funkcja jest całką to wykonujemy tą część kodu
