@@ -38,5 +38,3 @@ def calka_monte_carlo(funkcja, a, b):
     pole = (maximum-minimum) *(b-a)
     calka = posibility * pole
     return calka
-        
-print(calka_monte_carlo('sin(x)',2,5))
