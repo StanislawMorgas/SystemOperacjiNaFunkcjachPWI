@@ -1,4 +1,5 @@
 from time import sleep
+from Wykres_funkcji import calka, wykres
 from input import *
 from calka_monte_carlo import *
 from calka_num import *
@@ -14,22 +15,28 @@ def wybierzFunkcje(lista):
         except ValueError:
             print("Wpisano niepoprawny argument")
 
-def wybierzZakres():
+def wybierzZakres(c):
     while True:
         try:
-            a = int(input("Podaj lewy zakres całki: "))
-            break
+            if c:
+                a = int(input("Podaj lewy zakres wykresu: "))
+                break
+            else:
+                a = int(input("Podaj lewy zakres całki: "))
+                break
         except ValueError:
             print("Wpisano niepoprawny argument")
     while True:
         try:
-            b = int(input("Podaj prawy zakres całki: "))
+            if c:
+                b = int(input("Podaj prawy zakres wykresu: "))
+            else:
+                b = int(input("Podaj prawy zakres całki: "))
             if b < a:
                 print("Podano błędny zakres.")
             else: return a,b
         except ValueError:
             print("Wpisano niepoprawny argument")
-
 
 logo = r"""
  ________  ________  ________   ________ 
@@ -77,14 +84,14 @@ while True:
     elif a == 2:
         if czy_wczytane:
             wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
-            a,b = wybierzZakres()
+            a,b = wybierzZakres(False)
             print(f"Wynik: {calka_monte_carlo(wybor,a,b)}")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 3:
         if czy_wczytane:
             wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
-            a, b = wybierzZakres()
+            a, b = wybierzZakres(False)
             print(f"Wynik: {calka_num(wybor,a,b)}")
         else:
             print("Funkcje nie zostały wczytane")
@@ -96,8 +103,10 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 5:
         if czy_wczytane:
-            #tu cos do rysowania wykresow
-            pass
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            a, b = wybierzZakres(True)
+            wykres(a,b,wybor)
+            print('Wykres został wygenerowany do pliku "wykres.png".')
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 6:
