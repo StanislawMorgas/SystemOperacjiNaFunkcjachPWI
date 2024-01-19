@@ -4,10 +4,13 @@ from input import *
 from calka_monte_carlo import *
 from calka_num import *
 
-def wybierzFunkcje(lista):
+def wybierzFunkcje(lista,c):
     while True:
         try:
-            a = int(input("Podaj indeks funkcji która chesz użyć (Zaczynając od 1): "))
+            if c:
+                a = int(input("Podaj indeks funkcji która chesz usunąć (Zaczynając od 1): "))
+            else:
+                a = int(input("Podaj indeks funkcji która chesz użyć (Zaczynając od 1): "))
             if a > 0 and a <= len(lista):
                 return a-1
             else:
@@ -67,8 +70,10 @@ while True:
     3. Oblicz całke (Numerycznie)
     4. Uprość funkcje
     5. Narysuj wykres funkcji
-    6. Zapisz funkcje do pliku
-    7. Zakończ
+    6. Dodaj funkcje do listy
+    7. Usuń funkcje z listy
+    8. Zapisz funkcje do pliku
+    9. Zakończ
     """)
     try:
         a = int(input("Wpisz numer operacji: "))
@@ -83,16 +88,22 @@ while True:
         funk = wczytaj()
     elif a == 2:
         if czy_wczytane:
-            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
             a,b = wybierzZakres(False)
-            print(f"Wynik: {calka_monte_carlo(wybor,a,b)}")
+            try:
+                print(f"Wynik: {calka_monte_carlo(wybor,a,b)}")
+            except TypeError:
+                print("Podana funkcja jest niepoprawna.")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 3:
         if czy_wczytane:
-            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
             a, b = wybierzZakres(False)
-            print(f"Wynik: {calka_num(wybor,a,b)}")
+            try:
+                print(f"Wynik: {calka_num(wybor,a,b)}")
+            except NameError:
+                print("Podana funkcja jest niepoprawna.")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 4:
@@ -103,18 +114,31 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 5:
         if czy_wczytane:
-            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
             a, b = wybierzZakres(True)
-            wykres(a,b,wybor)
-            print('Wykres został wygenerowany do pliku "wykres.png".')
+            if "^" in list(wybor):
+                wybor = wybor.replace("^", "**")
+            try:
+                wykres(a,b,wybor)
+                print('Wykres został wygenerowany do pliku "wykres.png".')
+            except NameError:
+                print("Podana funkcja jest niepoprawna")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 6:
         if czy_wczytane:
+            funk.append("y = " + input("Podaj wzór funkcji, y = "))
+    elif a == 7:
+        if czy_wczytane:
+            funk.pop(wybierzFunkcje(funk,True))
+        else:
+            print("Funkcje nie zostały wczytane")
+    elif a == 8:
+        if czy_wczytane:
             zapisz(funk)
         else:
             print("Funkcje nie zostały wczytane")
-    elif a == 7:
+    elif a == 9:
         print("Miłego dnia :)")
         exit()
     else:
