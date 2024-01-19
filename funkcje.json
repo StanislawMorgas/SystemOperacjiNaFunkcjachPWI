@@ -1,7 +1,6 @@
 {
     "funkcje": [
         "y = x^2",
-        "y = sraka",
         "y = sin(x)",
         "y = cos(x)"
     ]
