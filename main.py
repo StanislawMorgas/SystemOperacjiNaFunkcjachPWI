@@ -4,10 +4,13 @@ from input import *
 from calka_monte_carlo import *
 from calka_num import *
 
-def wybierzFunkcje(lista):
+def wybierzFunkcje(lista,c):
     while True:
         try:
-            a = int(input("Podaj indeks funkcji która chesz użyć (Zaczynając od 1): "))
+            if c:
+                a = int(input("Podaj indeks funkcji która chesz usunąć (Zaczynając od 1): "))
+            else:
+                a = int(input("Podaj indeks funkcji która chesz użyć (Zaczynając od 1): "))
             if a > 0 and a <= len(lista):
                 return a-1
             else:
@@ -68,8 +71,9 @@ while True:
     4. Uprość funkcje
     5. Narysuj wykres funkcji
     6. Dodaj funkcje do listy
-    7. Zapisz funkcje do pliku
-    8. Zakończ
+    7. Usuń funkcje z listy
+    8. Zapisz funkcje do pliku
+    9. Zakończ
     """)
     try:
         a = int(input("Wpisz numer operacji: "))
@@ -84,7 +88,7 @@ while True:
         funk = wczytaj()
     elif a == 2:
         if czy_wczytane:
-            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
             a,b = wybierzZakres(False)
             try:
                 print(f"Wynik: {calka_monte_carlo(wybor,a,b)}")
@@ -94,7 +98,7 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 3:
         if czy_wczytane:
-            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
             a, b = wybierzZakres(False)
             try:
                 print(f"Wynik: {calka_num(wybor,a,b)}")
@@ -110,7 +114,7 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 5:
         if czy_wczytane:
-            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
             a, b = wybierzZakres(True)
             if "^" in list(wybor):
                 wybor = wybor.replace("^", "**")
@@ -126,10 +130,15 @@ while True:
             funk.append("y = " + input("Podaj wzór funkcji, y = "))
     elif a == 7:
         if czy_wczytane:
-            zapisz(funk)
+            funk.pop(wybierzFunkcje(funk,True))
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 8:
+        if czy_wczytane:
+            zapisz(funk)
+        else:
+            print("Funkcje nie zostały wczytane")
+    elif a == 9:
         print("Miłego dnia :)")
         exit()
     else:
