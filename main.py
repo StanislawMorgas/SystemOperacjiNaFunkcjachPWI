@@ -67,8 +67,9 @@ while True:
     3. Oblicz całke (Numerycznie)
     4. Uprość funkcje
     5. Narysuj wykres funkcji
-    6. Zapisz funkcje do pliku
-    7. Zakończ
+    6. Dodaj funkcje do listy
+    7. Zapisz funkcje do pliku
+    8. Zakończ
     """)
     try:
         a = int(input("Wpisz numer operacji: "))
@@ -85,14 +86,20 @@ while True:
         if czy_wczytane:
             wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
             a,b = wybierzZakres(False)
-            print(f"Wynik: {calka_monte_carlo(wybor,a,b)}")
+            try:
+                print(f"Wynik: {calka_monte_carlo(wybor,a,b)}")
+            except TypeError:
+                print("Podana funkcja jest niepoprawna.")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 3:
         if czy_wczytane:
             wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
             a, b = wybierzZakres(False)
-            print(f"Wynik: {calka_num(wybor,a,b)}")
+            try:
+                print(f"Wynik: {calka_num(wybor,a,b)}")
+            except NameError:
+                print("Podana funkcja jest niepoprawna.")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 4:
@@ -105,16 +112,24 @@ while True:
         if czy_wczytane:
             wybor = parsujDoObliczen(funk[wybierzFunkcje(funk)])
             a, b = wybierzZakres(True)
-            wykres(a,b,wybor)
-            print('Wykres został wygenerowany do pliku "wykres.png".')
+            if "^" in list(wybor):
+                wybor = wybor.replace("^", "**")
+            try:
+                wykres(a,b,wybor)
+                print('Wykres został wygenerowany do pliku "wykres.png".')
+            except NameError:
+                print("Podana funkcja jest niepoprawna")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 6:
         if czy_wczytane:
+            funk.append("y = " + input("Podaj wzór funkcji, y = "))
+    elif a == 7:
+        if czy_wczytane:
             zapisz(funk)
         else:
             print("Funkcje nie zostały wczytane")
-    elif a == 7:
+    elif a == 8:
         print("Miłego dnia :)")
         exit()
     else:
