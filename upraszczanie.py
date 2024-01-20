@@ -1,15 +1,22 @@
-funkcja = "2*x + 1*x +0 +0 *1 2-0+1"
-funkcja = funkcja.replace(" ", "")
+from re import sub
 
+def simplify_expression(expression):
+    # Usuwanie mnożenia przez 1, ale tylko gdy nie wpłynie to na inne części wyrażenia
+    expression = sub(r'(?<=\W)1\*', '', expression)
+    expression = sub(r'\*1(?=\W|$)', '', expression)
 
-def mult1(fcja):
-    fcja = fcja.replace("1*", "")
-    fcja = fcja.replace("*1", "")
-    return fcja
+    # Usuwanie dzielenia przez 1
+    expression = sub(r'/1(?=\W|$)', '', expression)
 
-def add0(fcja):
-    fcja = fcja.replace("+0", "")
-    fcja = fcja.replace("-0", "")
-    return fcja
+    # Usuwanie odejmowania 0, ale tylko gdy nie wpłynie to na inne części wyrażenia
+    expression = sub(r'-0(?=\W|$)', '', expression)
 
-print(mult1(funkcja))
+    # Usuwanie dodawania 0, ale tylko gdy nie wpłynie to na inne części wyrażenia
+    expression = sub(r'\+0(?=\W|$)', '', expression)
+    expression = sub(r'(?<=\W)0\+', '', expression)
+
+    # Usuwanie ewentualnych zbędnych plusów na początku
+    if expression.startswith('+'):
+        expression = expression[1:]
+
+    return expression
