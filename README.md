@@ -12,14 +12,22 @@ oo     .d8P `88b    d88'  8       `888   888
 ```
 Projekt na przedmiot Podstawowy warsztat informatyka
 
+Program ma następujące funkcje:
+- Obliczanie całki (Metodą Monte Carlo)
+- Obliczanie całki (Numerycznie)
+- Upraszczanie funkcji
+- Rysowanie wykresu funkcji
+- Zapisywanie i odczytywanie funkcji w formacie JSON
 
-Specyfikacja do funkcji calka_monte_carlo : wymagane pobranie modułu sympy komendą:
-pip install sympy
 
-Specyfikacja do programu Wykres_funkcji: wymagane pobranie modułu numpy komendą: pip install numpy. Wymagane jest także posiadanie biblioteki mathplotlib.pyplot. Ponadto wymagane jest aby funkcja 
-której wykres chcemy narysować była określona w każdym punkcie żądanej dziedziny.
+Do uruchomienia programu potrzebny jest intepreter Python3
 
 Instalacja wymaganych bibliotek:
 ```commandline
 pip install -r requirements.txt
+```
+
+Uruchomienie programu:
+```commandline
+python3 main.py
 ```
