@@ -3,6 +3,9 @@ from Wykres_funkcji import calka, wykres
 from input import *
 from calka_monte_carlo import *
 from calka_num import *
+from plus_minus import *
+from upraszczanie import *
+from simple_mult import *
 
 def wybierzFunkcje(lista,c):
     while True:
@@ -108,7 +111,14 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 4:
         if czy_wczytane:
-            #tu cos do uproszczenia funkcji
+            opcja_dodatkowa = ""
+            while opcja_dodatkowa != "d":
+                print("W jaki sposób chcesz uprościć funkcję?")
+                print('a : pozbywanie się mnożenia i dzielenia przez 1 i dodawania 0') # simplyfy_expression(funkcja)
+                print('b : pozbywanie się wielokrotnego mnożenia przez -1') # add_minus(funkcja)
+                print('c : obliczanie trywialnych operacji takich jak wielokrotne mnożenie przez liczby całkowite') # simple_mult(funkcja)
+                print('d : zakończ')
+                opcja_dodatkowa = str(input())
             pass
         else:
             print("Funkcje nie zostały wczytane")
