@@ -2,6 +2,7 @@ from math import sin, cos, log, exp, tan
 
 
 def calka_num(funkcja, a, b):
+    funkcja = funkcja.replace('^', '**')
     dokladnosc = 10**5
     calka = 0
     przedzial = (b-a)/dokladnosc
