@@ -111,6 +111,7 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 4:
         if czy_wczytane:
+            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
             opcja_dodatkowa = ""
             while opcja_dodatkowa != "d":
                 print("W jaki sposób chcesz uprościć funkcję?")
@@ -119,7 +120,19 @@ while True:
                 print('c : obliczanie trywialnych operacji takich jak wielokrotne mnożenie przez liczby całkowite') # simple_mult(funkcja)
                 print('d : zakończ')
                 opcja_dodatkowa = str(input())
-            pass
+                if opcja_dodatkowa == "a":
+                    wybor = simplify_expression(wybor)
+                    print(wybor)
+                elif opcja_dodatkowa == "b":
+                    wybor = add_minus(wybor)
+                    print(wybor)
+                elif opcja_dodatkowa == "c":
+                    wybor = simple_mult(wybor)
+                    print(wybor)
+                elif opcja_dodatkowa == "d":
+                    pass
+                else:
+                    print("proszę wybrać poprawną opcję.")
         else:
             print("Funkcje nie zostały wczytane")
     elif a == 5:
