@@ -22,6 +22,12 @@ Program ma następujące funkcje:
 
 Do uruchomienia programu potrzebny jest intepreter Python3
 
+Instalacja:
+```commandline
+git clone https://github.com/StanislawMorgas/SystemOperacjiNaFunkcjachPWI.git
+cd SystemOperacjiNaFunkcjachPWI
+```
+
 Instalacja wymaganych bibliotek:
 ```commandline
 pip install -r requirements.txt
