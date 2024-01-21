@@ -5,7 +5,7 @@ def simple_mult(fcja):
     fcja = fcja.replace(" ", "")
 
     def mult_el(match):
-        match_tab = findall(r"sin\(.+?\)|cos\(.+?\)|x\^-?\d+|x|\d+\.\d+|\d+", match.group(0))
+        match_tab = findall(r"[-+]?sin\(.+?\)|[-+]?cos\(.+?\)|[-+]?x\^-?\d+|[-+]?x|[-+]?\d+\.\d+|[-+]?\d+", match.group(0))
         res_n = 1
         x_power = 0
         x_sign = "+"
@@ -62,9 +62,9 @@ def simple_mult(fcja):
         r"(\(?[+-]?(?:sin\(.+?\)|cos\(.+?\)|x\^-?\d+|x|\d+\.\d+|\d+)\)?)(?:\s*\*\s*(\(?[+-]?(?:sin\(.+?\)|cos\(.+?\)|x\^-?\d+|x|\d+\.\d+|\d+)\)?))+")
     fcja = sub(pattern_1, mult_el, fcja)
     fcja = sub(r"\*1(?:\*?)|(?:\*?)1\*", "", fcja)
-    while fcja[0] in set(["+", "*", "-", "/"]):
+    while fcja[0] in set(["+", "*"]):
         fcja = fcja[1:]
-    while fcja[len(fcja) - 1] in set(["+", "*", "-", "/"]):
+    while fcja[len(fcja) - 1] in set(["+", "*"]):
         fcja = fcja[:len(fcja) - 1]
     return fcja
 
