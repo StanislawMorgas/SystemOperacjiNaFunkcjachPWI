@@ -114,26 +114,29 @@ while True:
             numer = wybierzFunkcje(funk,False)
             wybor = parsujDoObliczen(funk[numer])
             opcja_dodatkowa = ""
+            print("W jaki sposób chcesz uprościć funkcję?")
+            print('a : pozbywanie się mnożenia i dzielenia przez 1 i dodawania 0') # simplyfy_expression(funkcja)
+            print('b : pozbywanie się wielokrotnego mnożenia przez -1') # add_minus(funkcja)
+            print('c : obliczanie trywialnych operacji takich jak wielokrotne mnożenie przez liczby całkowite') # simple_mult(funkcja)
+            print('d : zakończ')
             while opcja_dodatkowa != "d":
-                print("W jaki sposób chcesz uprościć funkcję?")
-                print('a : pozbywanie się mnożenia i dzielenia przez 1 i dodawania 0') # simplyfy_expression(funkcja)
-                print('b : pozbywanie się wielokrotnego mnożenia przez -1') # add_minus(funkcja)
-                print('c : obliczanie trywialnych operacji takich jak wielokrotne mnożenie przez liczby całkowite') # simple_mult(funkcja)
-                print('d : zakończ')
                 opcja_dodatkowa = str(input())
                 if opcja_dodatkowa == "a":
                     wybor = simplify_expression(wybor)
                     wybor = parsujDoZapisu(wybor)
+                    print(wybor)
                     funk[numer] = wybor
                     wybor = parsujDoObliczen(wybor)
                 elif opcja_dodatkowa == "b":
                     wybor = add_minus(wybor)
                     wybor = parsujDoZapisu(wybor)
+                    print(wybor)
                     funk[numer] = wybor
                     wybor = parsujDoObliczen(wybor)
                 elif opcja_dodatkowa == "c":
                     wybor = simple_mult(wybor)
                     wybor = parsujDoZapisu(wybor)
+                    print(wybor)
                     funk[numer] = wybor
                     wybor = parsujDoObliczen(wybor)
                 elif opcja_dodatkowa == "d":
