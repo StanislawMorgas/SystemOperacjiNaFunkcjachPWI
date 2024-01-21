@@ -27,6 +27,7 @@ def wczytaj():
     print("Miłego dnia :)")
     print()
     return funkcje_lista
+
 def parsujDoObliczen(f):
     return f.split(" ")[2]
 

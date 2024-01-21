@@ -111,7 +111,8 @@ while True:
             print("Funkcje nie zostały wczytane")
     elif a == 4:
         if czy_wczytane:
-            wybor = parsujDoObliczen(funk[wybierzFunkcje(funk,False)])
+            numer = wybierzFunkcje(funk,False)
+            wybor = parsujDoObliczen(funk[numer])
             opcja_dodatkowa = ""
             while opcja_dodatkowa != "d":
                 print("W jaki sposób chcesz uprościć funkcję?")
@@ -122,13 +123,19 @@ while True:
                 opcja_dodatkowa = str(input())
                 if opcja_dodatkowa == "a":
                     wybor = simplify_expression(wybor)
-                    print(wybor)
+                    wybor = parsujDoZapisu(wybor)
+                    funk[numer] = wybor
+                    wybor = parsujDoObliczen(wybor)
                 elif opcja_dodatkowa == "b":
                     wybor = add_minus(wybor)
-                    print(wybor)
+                    wybor = parsujDoZapisu(wybor)
+                    funk[numer] = wybor
+                    wybor = parsujDoObliczen(wybor)
                 elif opcja_dodatkowa == "c":
                     wybor = simple_mult(wybor)
-                    print(wybor)
+                    wybor = parsujDoZapisu(wybor)
+                    funk[numer] = wybor
+                    wybor = parsujDoObliczen(wybor)
                 elif opcja_dodatkowa == "d":
                     pass
                 else:
