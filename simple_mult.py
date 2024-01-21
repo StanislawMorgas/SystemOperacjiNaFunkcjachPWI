@@ -5,19 +5,22 @@ def simple_mult(fcja):
     fcja = fcja.replace(" ", "")
 
     def mult_el(match):
-        match_tab = findall(r'-?x\^-?\d+|x|\d+\.\d+|\d+', match.group(0))
+        match_tab = findall(r"sin\(.+?\)|cos\(.+?\)|x\^-?\d+|x|\d+\.\d+|\d+", match.group(0))
         res_n = 1
         x_power = 0
         x_sign = "+"
+        rest = ""
         for n in match_tab:
-            if "x" in n:
+            if "sin" in n or "cos" in n:
+                rest = rest + "*" + n
+            elif "x" in n:
                 if "^" in n:
-                    temp_1 = findall(r"\^(-?\d+)",n)
+                    temp_1 = findall(r"\^(-?\d+)", n)
                     temp_power = temp_1[0]
                     x_power += int(temp_power)
                 else:
                     x_power += 1
-                temp_2 = findall(r"^([+-])?x",n)
+                temp_2 = findall(r"^([+-])?x", n)
                 if temp_2[0] == "+" or temp_2[0] == "":
                     temp_sign = "+"
                 else:
@@ -32,7 +35,7 @@ def simple_mult(fcja):
             else:
                 res_n *= int(n)
 
-        #iloraz rowny 0
+        # iloraz rowny 0
         if res_n == 0:
             return ""
         if res_n > 0:
@@ -41,25 +44,27 @@ def simple_mult(fcja):
         else:
             n_sign = "-"
             res_n = str(res_n)[1:]
-        #nie ma x
+        # nie ma x
         if x_power == 0:
-            return n_sign + res_n
-        #jest x
+            return n_sign + res_n + rest
+        # jest x
         else:
-            if x_power > 1:
-                res_x = f"x^{x_power}"
-            else:
+            if x_power == 1:
                 res_x = "x"
-            if x_sign == "+" and n_sign == "+" or n_sign == "-" and x_sign == "-":
-                return "+" + res_n + "*" + res_x
             else:
-                return "-" + res_n + "*" + res_x
-    pattern_1 = compile(r"(\(?[+-]?(?:x\^-?\d+|x|\d+\.\d+|\d+)\)?)(?:\s*\*\s*(\(?[+-]?(?:x\^-?\d+|x|\d+\.\d+|\d+)\)?))+")
-    fcja = sub(pattern_1, mult_el, fcja)
+                res_x = f"x^{x_power}"
+        if x_sign == "+" and n_sign == "+" or n_sign == "-" and x_sign == "-":
+            return "+" + res_n + "*" + res_x + rest
+        else:
+            return "-" + res_n + "*" + res_x + rest
 
+    pattern_1 = compile(
+        r"(\(?[+-]?(?:sin\(.+?\)|cos\(.+?\)|x\^-?\d+|x|\d+\.\d+|\d+)\)?)(?:\s*\*\s*(\(?[+-]?(?:sin\(.+?\)|cos\(.+?\)|x\^-?\d+|x|\d+\.\d+|\d+)\)?))+")
+    fcja = sub(pattern_1, mult_el, fcja)
+    fcja = sub(r"\*1(?:\*?)|(?:\*?)1\*", "", fcja)
     while fcja[0] in set(["+", "*", "-", "/"]):
         fcja = fcja[1:]
-    while fcja[len(fcja)-1] in set(["+", "*", "-", "/"]):
-        fcja = fcja[:len(fcja)-1]
+    while fcja[len(fcja) - 1] in set(["+", "*", "-", "/"]):
+        fcja = fcja[:len(fcja) - 1]
     return fcja
 
